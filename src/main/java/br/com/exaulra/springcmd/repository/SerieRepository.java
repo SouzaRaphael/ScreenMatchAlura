@@ -1,6 +1,7 @@
 package br.com.exaulra.springcmd.repository;
 
 import br.com.exaulra.springcmd.models.Categoria;
+import br.com.exaulra.springcmd.models.Episodio;
 import br.com.exaulra.springcmd.models.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,12 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     List<Serie> findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(int numeroTemporadas, double avaliacao);
     @Query("select s from Serie s where s.totalTemporadas <= :numeroTemporadas and s.avaliacao >= :avaliacao")
     List<Serie> seriesPorTemporadaEAvaliacao(int numeroTemporadas, double avaliacao);
+    @Query("select e from Serie s join s.episodios e where e.titulo ilike %:trechoEpisodio%")
+    List<Episodio> episodiosPorTrecho(String trechoEpisodio);
+    @Query("select e from Serie s join s.episodios e where s = :s order by e.avaliacao limit 5")
+    List<Episodio> top5EpisodiosPorSerie(Serie s);
+    @Query("select e from Serie s join s.episodios e where s = :serieEncontrada and year(e.dataLancamento) >= :anoLancamento")
+    List<Episodio> episodiosPorSerieEAno(Serie serieEncontrada, int anoLancamento);
 }
 //    Palavras relativas à igualdade:
 //

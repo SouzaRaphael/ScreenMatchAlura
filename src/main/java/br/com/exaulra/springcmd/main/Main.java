@@ -33,6 +33,9 @@ public class Main {
                     6 - Top 5 séries
                     7 - Buscar séries por categoria
                     8 - Filtrar séries
+                    9 - Buscar episódios por trecho
+                    10 - Top 5 episódios por série
+                    11 - Buscar episódios por data
                                     
                     0 - Sair                                 
                     """;
@@ -65,6 +68,15 @@ public class Main {
                     break;
                 case 8:
                     filtrarSeriesPorTemporadaEAvaliacao();
+                    break;
+                case 9:
+                    buscarEpisodioPorTrecho();
+                    break;
+                case 10:
+                    buscarTop5EpisodiosPorSerie();
+                    break;
+                case 11:
+                    buscarEpisodiosPorData();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -180,5 +192,44 @@ public class Main {
         System.out.println("*** Séries filtradas ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + "  - avaliação: " + s.getAvaliacao()));
+    }
+
+    private void buscarEpisodioPorTrecho() {
+        System.out.print("Digite o nome de uma episódio já buscado: ");
+        String trechoEpisodio = in.nextLine();
+        List<Episodio> episodiosEncontrados = repositorioSerie.episodiosPorTrecho(trechoEpisodio);
+        episodiosEncontrados.forEach(System.out::println);
+    }
+
+    private void buscarTop5EpisodiosPorSerie() {
+        System.out.print("Digite o nome de uma serie ja buscada: ");
+        String nomeSerie = in.nextLine();
+        Optional<Serie> serieBuscada = repositorioSerie.findByTituloContainingIgnoreCase(nomeSerie);
+
+        if (serieBuscada.isPresent()) {
+            Serie serieEncontrada = serieBuscada.get();
+            List<Episodio> topEpisodios = repositorioSerie.top5EpisodiosPorSerie(serieEncontrada);
+            topEpisodios.forEach(System.out::println);
+        } else {
+            System.out.println("Série não encontrada.");
+        }
+    }
+
+    private void buscarEpisodiosPorData() {
+        System.out.print("Digite o nome de uma serie ja buscada: ");
+        String nomeSerie = in.nextLine();
+        Optional<Serie> serieBuscada = repositorioSerie.findByTituloContainingIgnoreCase(nomeSerie);
+
+        if (serieBuscada.isPresent()) {
+            Serie serieEncontrada = serieBuscada.get();
+
+            System.out.print("Digite o limite do ano de lançamento: ");
+            int anoLancamento = in.nextInt();
+
+            List<Episodio> episodiosAno = repositorioSerie.episodiosPorSerieEAno(serieEncontrada, anoLancamento);
+            episodiosAno.forEach(System.out::println);
+        } else {
+            System.out.println("Série não encontrada.");
+        }
     }
 }

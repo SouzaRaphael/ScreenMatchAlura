@@ -97,6 +97,7 @@ public class Episodio {
                 ", numeroEpisodio=" + numeroEpisodio +
                 ", dataLancamento=" + dataLancamento +
                 ", avaliacao=" + avaliacao +
+                ", serie=" + serie +
                 '}';
     }
 }

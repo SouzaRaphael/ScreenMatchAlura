@@ -1,4 +1,4 @@
-package br.com.exaulra.springcmd.models;
+package br.com.exaulra.ScreenMatch.models;
 
 import java.util.ArrayList;
 import java.util.List;

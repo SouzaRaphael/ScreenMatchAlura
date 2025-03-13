@@ -1,6 +1,6 @@
-package br.com.exaulra.springcmd.repository;
+package br.com.exaulra.ScreenMatch.repository;
 
-import br.com.exaulra.springcmd.models.Episodio;
+import br.com.exaulra.ScreenMatch.models.Episodio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EpisodioRepository extends JpaRepository<Episodio, Long> {}

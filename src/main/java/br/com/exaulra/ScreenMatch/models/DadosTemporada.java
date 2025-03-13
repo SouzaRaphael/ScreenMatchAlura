@@ -1,4 +1,4 @@
-package br.com.exaulra.springcmd.models;
+package br.com.exaulra.ScreenMatch.models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -1,8 +1,8 @@
-package br.com.exaulra.springcmd.repository;
+package br.com.exaulra.ScreenMatch.repository;
 
-import br.com.exaulra.springcmd.models.Categoria;
-import br.com.exaulra.springcmd.models.Episodio;
-import br.com.exaulra.springcmd.models.Serie;
+import br.com.exaulra.ScreenMatch.models.Categoria;
+import br.com.exaulra.ScreenMatch.models.Episodio;
+import br.com.exaulra.ScreenMatch.models.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

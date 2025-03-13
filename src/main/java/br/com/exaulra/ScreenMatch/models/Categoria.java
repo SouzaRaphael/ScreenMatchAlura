@@ -1,4 +1,4 @@
-package br.com.exaulra.springcmd.models;
+package br.com.exaulra.ScreenMatch.models;
 
 public enum Categoria {
     ACAO("Action", "Ação"),

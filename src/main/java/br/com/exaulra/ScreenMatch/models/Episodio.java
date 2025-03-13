@@ -1,4 +1,4 @@
-package br.com.exaulra.springcmd.models;
+package br.com.exaulra.ScreenMatch.models;
 
 import jakarta.persistence.*;
 

@@ -1,9 +1,9 @@
-package br.com.exaulra.springcmd.main;
+package br.com.exaulra.ScreenMatch.main;
 
-import br.com.exaulra.springcmd.models.*;
-import br.com.exaulra.springcmd.repository.SerieRepository;
-import br.com.exaulra.springcmd.services.ConsumoApi;
-import br.com.exaulra.springcmd.services.ConverteDados;
+import br.com.exaulra.ScreenMatch.models.*;
+import br.com.exaulra.ScreenMatch.repository.SerieRepository;
+import br.com.exaulra.ScreenMatch.services.ConsumoApi;
+import br.com.exaulra.ScreenMatch.services.ConverteDados;
 
 import java.util.*;
 

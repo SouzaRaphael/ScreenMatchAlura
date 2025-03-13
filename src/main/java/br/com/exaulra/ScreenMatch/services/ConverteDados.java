@@ -1,4 +1,4 @@
-package br.com.exaulra.springcmd.services;
+package br.com.exaulra.ScreenMatch.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

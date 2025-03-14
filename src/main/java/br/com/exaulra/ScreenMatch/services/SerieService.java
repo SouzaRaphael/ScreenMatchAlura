@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SerieService {
@@ -34,5 +35,26 @@ public class SerieService {
                         )
                 )
                 .toList();
+    }
+
+    public List<SerieDTO> obterLancamentos() {
+        return converteDados(serieRepository.encontrarEpisodiosMaisRecentes());
+    }
+
+    public SerieDTO obterPorId(Long id) {
+        Optional<Serie> serieBuscada = serieRepository.findById(id);
+        if (serieBuscada.isPresent()) {
+            Serie serieEncontrada = serieBuscada.get();
+            return new SerieDTO(
+                    serieEncontrada.getId(),
+                    serieEncontrada.getTitulo(),
+                    serieEncontrada.getTotalTemporadas(),
+                    serieEncontrada.getAvaliacao(),
+                    serieEncontrada.getGenero(),
+                    serieEncontrada.getAtores(),
+                    serieEncontrada.getPoster()  
+            );
+        }
+        return null;
     }
 }

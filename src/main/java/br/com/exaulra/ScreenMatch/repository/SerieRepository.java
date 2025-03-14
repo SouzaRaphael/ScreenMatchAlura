@@ -23,6 +23,11 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     List<Episodio> top5EpisodiosPorSerie(Serie s);
     @Query("select e from Serie s join s.episodios e where s = :serieEncontrada and year(e.dataLancamento) >= :anoLancamento")
     List<Episodio> episodiosPorSerieEAno(Serie serieEncontrada, int anoLancamento);
+    @Query("SELECT s FROM Serie s " +
+            "JOIN s.episodios e " +
+            "GROUP BY s " +
+            "ORDER BY MAX(e.dataLancamento) DESC LIMIT 5")
+    List<Serie> encontrarEpisodiosMaisRecentes();
 }
 //    Palavras relativas à igualdade:
 //

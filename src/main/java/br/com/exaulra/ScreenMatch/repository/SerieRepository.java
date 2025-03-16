@@ -28,6 +28,8 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
             "GROUP BY s " +
             "ORDER BY MAX(e.dataLancamento) DESC LIMIT 5")
     List<Serie> encontrarEpisodiosMaisRecentes();
+    @Query("select e from Serie s join s.episodios e where s.id = :id and e.temporada = :numeroTemporada")
+    List<Episodio> episodiosPorTemporada(Long id, int numeroTemporada);
 }
 //    Palavras relativas à igualdade:
 //

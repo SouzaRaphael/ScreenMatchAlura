@@ -1,6 +1,8 @@
 package br.com.exaulra.ScreenMatch.services;
 
+import br.com.exaulra.ScreenMatch.dto.EpisodioDTO;
 import br.com.exaulra.ScreenMatch.dto.SerieDTO;
+import br.com.exaulra.ScreenMatch.models.Categoria;
 import br.com.exaulra.ScreenMatch.models.Serie;
 import br.com.exaulra.ScreenMatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,33 @@ public class SerieService {
             );
         }
         return null;
+    }
+
+    public List<SerieDTO> obterPorCategoria(String nomeCategoria) {
+        Categoria categoria = Categoria.fromPortugues(nomeCategoria);
+        return converteDados(serieRepository.findByGenero(categoria));
+    }
+
+    public List<EpisodioDTO> obterTemporadasSerie(Long id) {
+        Optional<Serie> serieBuscada = serieRepository.findById(id);
+        if (serieBuscada.isPresent()) {
+            Serie serieEncontrada = serieBuscada.get();
+            return serieEncontrada.getEpisodios().stream()
+                    .map(sE -> new EpisodioDTO(sE.getTitulo(), sE.getTemporada(), sE.getNumeroEpisodio()))
+                    .toList();
+        }
+        return null;
+    }
+
+    public List<EpisodioDTO> obterTemporadaPorNumero(Long id, int numeroTemporada) {
+        return serieRepository.episodiosPorTemporada(id, numeroTemporada).stream()
+                .map(e -> new EpisodioDTO(e.getTitulo(), e.getTemporada(), e.getNumeroEpisodio()))
+                .toList();
+    }
+
+    public List<EpisodioDTO> obterTop5Episodios(Long id) {
+        return serieRepository.top5EpisodiosPorSerie(serieRepository.findById(id).get()).stream()
+                .map(e -> new EpisodioDTO(e.getTitulo(), e.getTemporada(), e.getNumeroEpisodio()))
+                .toList();
     }
 }

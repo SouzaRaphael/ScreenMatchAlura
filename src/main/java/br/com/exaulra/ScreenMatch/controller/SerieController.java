@@ -1,5 +1,6 @@
 package br.com.exaulra.ScreenMatch.controller;
 
+import br.com.exaulra.ScreenMatch.dto.EpisodioDTO;
 import br.com.exaulra.ScreenMatch.dto.SerieDTO;
 import br.com.exaulra.ScreenMatch.services.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,28 @@ public class SerieController {
         return serieService.obterLancamentos();
     }
 
+    @GetMapping("/categoria/{nomeCategoria}")
+    public List<SerieDTO> obterPorCategoria(@PathVariable String nomeCategoria) {
+        return serieService.obterPorCategoria(nomeCategoria);
+    }
+
     @GetMapping("/{id}")
     public SerieDTO obterPorId(@PathVariable Long id) {
         return serieService.obterPorId(id);
+    }
+
+    @GetMapping("/{id}/temporadas/todas")
+    public List<EpisodioDTO> obterEpisodiosSerie(@PathVariable Long id) {
+        return serieService.obterTemporadasSerie(id);
+    }
+
+    @GetMapping("/{id}/temporadas/{numeroTemporada}")
+    public List<EpisodioDTO> obterEpisodiosSerie(@PathVariable Long id, @PathVariable int numeroTemporada) {
+        return serieService.obterTemporadaPorNumero(id, numeroTemporada);
+    }
+
+    @GetMapping("/{id}/temporadas/top")
+    public List<EpisodioDTO> obterTop5Episodios(@PathVariable Long id) {
+        return serieService.obterTop5Episodios(id);
     }
 }
